@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+/* ─── Global Base ─────────────────────────────────────────────────── */
+@layer base {
+  body {
+    @apply antialiased overflow-x-hidden;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #06060a;
+    background-image:
+      radial-gradient(at 20% 10%, rgba(30, 20, 60, 0.35) 0px, transparent 55%),
+      radial-gradient(at 80% 5%,  rgba(60, 20, 20, 0.25) 0px, transparent 50%),
+      radial-gradient(at 50% 95%, rgba(5,  5,  5,  1.0)  0px, transparent 65%);
+    background-attachment: fixed;
+    color: #e2e8f0;
+  }
+
+  *:focus-visible {
+    outline: 2px solid rgba(6, 182, 212, 0.6);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* ─── Typography helpers ──────────────────────────────────────────── */
+.font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+}
+
+/* ─── D3 Axis & Grid ──────────────────────────────────────────────── */
+.grid-lines line {
+  stroke: #1a1a22;
+  stroke-dasharray: 1 5;
+  stroke-opacity: 0.8;
+}
+
+.grid-lines .domain {
+  display: none;
+}
+
+.x-axis path,
+.y-axis path {
+  stroke: #27272f;
+  stroke-width: 1.2;
+}
+
+.x-axis line,
+.y-axis line {
+  stroke: #27272f;
+  stroke-width: 0.8;
+}
+
+.x-axis text,
+.y-axis text {
+  fill: #64748b;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Star points ─────────────────────────────────────────────────── */
+.star-point {
+  transition: r 80ms ease-out;
+}
+
+/* ─── Animations ──────────────────────────────────────────────────── */
+@keyframes pulseRing {
+  0%   { r: 10; opacity: 0.9; }
+  70%  { r: 22; opacity: 0.1; }
+  100% { r: 22; opacity: 0;   }
+}
+
+.selection-pulse-ring {
+  animation: pulseRing 1.6s ease-out infinite;
+}
+
+@keyframes breatheGlow {
+  0%, 100% { opacity: 0.05; }
+  50%       { opacity: 0.13; }
+}
+
+.bg-glow-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  height: 70%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(55, 30, 90, 0.12) 0%,
+    rgba(30, 15, 60, 0.06) 40%,
+    transparent 100%
+  );
+  filter: blur(130px);
+  pointer-events: none;
+  animation: breatheGlow 14s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.3s ease-out forwards;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0);       }
+}
+
+.animate-modal-in {
+  animation: modalIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────── */
+::-webkit-scrollbar         { width: 4px; height: 4px; }
+::-webkit-scrollbar-track   { background: #09090c; }
+::-webkit-scrollbar-thumb   { background: #3f3f52; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #52526a; }
+
+/* ─── Selection colour ────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(6, 182, 212, 0.28);
+  color: #a5f3fc;
+}
