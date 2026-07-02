@@ -67,13 +67,3 @@ export function getStellarColor(temperature: number): string {
   return '#ffffff';
 }
 
-/**
- * Returns a glow color (slightly more saturated/bright version) for hover effects.
- */
-export function getStellarGlowColor(temperature: number): string {
-  const base = getStellarColor(temperature);
-  const [r, g, b] = hexToRgb(base);
-  // Boost brightness for the glow
-  const boost = 40;
-  return rgbToHex(r + boost, g + boost, b + boost);
-}

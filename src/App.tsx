@@ -160,7 +160,6 @@ const App: React.FC = () => {
                   allStars={stars}
                   selectedStarName={selectedStarName}
                   onSelectStar={setSelectedStarName}
-                  highlightedRegion={filters.highlightedRegion}
                   activeOverlays={filters.activeOverlays}
                 />
               </div>

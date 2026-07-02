@@ -68,9 +68,7 @@ export const FiltersPanel: React.FC<FiltersPanelProps> = ({
   };
 
   const handleOverlaysChange = (nextOverlays: string[]) => {
-    // Also update highlightedRegion from the first active overlay (for the diagram)
-    const highlightedRegion = nextOverlays.length > 0 ? nextOverlays[0] : null;
-    onChangeFilters({ ...filters, activeOverlays: nextOverlays, highlightedRegion });
+    onChangeFilters({ ...filters, activeOverlays: nextOverlays });
   };
 
   const sidebarContent = (

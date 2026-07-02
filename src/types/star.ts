@@ -22,12 +22,11 @@ export interface UseStarsReturn {
 }
 
 export interface FilterState {
-  spectralClasses: string[];           // e.g., ['O', 'B', 'A', 'F', 'G', 'K', 'M']
-  luminosityClasses: string[];         // e.g., ['I', 'II', 'III', 'IV', 'V']
-  maxDistance: number;                 // light years, up to 1000
-  magnitudeRange: [number, number];    // [minMagnitude, maxMagnitude]
-  activeOverlays: string[];            // e.g., ['Main Sequence', 'Giants', 'Supergiants', 'White Dwarfs']
-  highlightedRegion: string | null;    // single region for direct highlight (used by HRDiagram)
+  spectralClasses: string[];        // e.g., ['O', 'B', 'A', 'F', 'G', 'K', 'M']
+  luminosityClasses: string[];      // e.g., ['I', 'II', 'III', 'IV', 'V']
+  maxDistance: number;              // light years, up to 1000
+  magnitudeRange: [number, number]; // [minMagnitude, maxMagnitude]
+  activeOverlays: string[];         // e.g., ['Main Sequence', 'Giants', 'Supergiants', 'White Dwarfs']
 }
 
 export interface StellarStats {

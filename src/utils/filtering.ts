@@ -5,7 +5,6 @@ export const DEFAULT_FILTERS: FilterState = {
   luminosityClasses: ['I', 'II', 'III', 'IV', 'V'],
   maxDistance: 1000,
   magnitudeRange: [-2, 15],
-  highlightedRegion: null,
   activeOverlays: [],
 };
 
@@ -63,12 +62,6 @@ export function filterStars(stars: Star[], filters: FilterState): Star[] {
       return false;
     }
 
-    // 5. Region Highlight Filter (if active, we can show everything, but we highlight the region. 
-    // In terms of filtering, we don't hide other stars unless we want to, but the prompt says 
-    // "Allow users to toggle visibility of Main Sequence, Giants, Supergiants, White Dwarfs. For Phase 2: Use transparent overlay regions. No educational panel yet. Just visual highlighting."
-    // So visual highlighting means the other stars are still visible, but the selected region is highlighted. 
-    // Thus we don't filter out stars based on highlightedRegion, we just pass this information to the diagram.)
-
     return true;
   });
 }
@@ -81,7 +74,6 @@ export function deserializeFilters(params: URLSearchParams): FilterState {
   const luminosity = params.get('luminosity');
   const distance = params.get('distance');
   const magnitude = params.get('magnitude');
-  const region = params.get('region');
   const overlays = params.get('overlays');
 
   return {
@@ -91,7 +83,6 @@ export function deserializeFilters(params: URLSearchParams): FilterState {
     magnitudeRange: magnitude
       ? (magnitude.split(',').map(Number) as [number, number])
       : DEFAULT_FILTERS.magnitudeRange,
-    highlightedRegion: region || DEFAULT_FILTERS.highlightedRegion,
     activeOverlays: overlays ? overlays.split(',').filter(Boolean) : DEFAULT_FILTERS.activeOverlays,
   };
 }
@@ -114,9 +105,6 @@ export function serializeFilters(filters: FilterState): string {
   }
   if (JSON.stringify(filters.magnitudeRange) !== JSON.stringify(DEFAULT_FILTERS.magnitudeRange)) {
     params.set('magnitude', filters.magnitudeRange.join(','));
-  }
-  if (filters.highlightedRegion !== DEFAULT_FILTERS.highlightedRegion) {
-    params.set('region', filters.highlightedRegion || '');
   }
   if (filters.activeOverlays.length > 0) {
     params.set('overlays', filters.activeOverlays.join(','));
