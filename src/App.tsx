@@ -6,6 +6,7 @@ import { Footer } from './components/Footer';
 import { FiltersPanel } from './components/FiltersPanel';
 import { SearchBar } from './components/SearchBar';
 import { InfoModal } from './components/InfoModal';
+import { ProjectStoryModal } from './components/ProjectStoryModal';
 import { filterStars, deserializeFilters, serializeFilters, DEFAULT_FILTERS } from './utils/filtering';
 import { calculateStats } from './utils/statistics';
 import type { FilterState } from './types/star';
@@ -25,6 +26,9 @@ const App: React.FC = () => {
 
   // Info modal open state
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+
+  // Project story modal open state
+  const [isProjectStoryOpen, setIsProjectStoryOpen] = useState(true);
 
   // Initialise filters from URL and set sidebar default based on screen width
   useEffect(() => {
@@ -169,10 +173,13 @@ const App: React.FC = () => {
       </div>
 
       {/* ── Footer ───────────────────────────────────────────────── */}
-      <Footer />
+      <Footer onOpenProjectStory={() => setIsProjectStoryOpen(true)} />
 
       {/* ── Info / About Modal ───────────────────────────────────── */}
       <InfoModal isOpen={isInfoOpen} onClose={() => setIsInfoOpen(false)} />
+
+      {/* ── Project Story Modal ──────────────────────────────────── */}
+      <ProjectStoryModal isOpen={isProjectStoryOpen} onClose={() => setIsProjectStoryOpen(false)} />
     </div>
   );
 };
